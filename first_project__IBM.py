@@ -9,7 +9,6 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-# ---------------- DATABASE ----------------
 conn = sqlite3.connect("users.db")
 cursor = conn.cursor()
 
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS users(
 )
 """)
 
-# ------------- SIGN IN WINDOW FUNCTION --------------
 def open_signin_window():
     signin_win = Toplevel()
     signin_win.title("Signin")
@@ -101,7 +99,7 @@ def open_signin_window():
     code.insert(0, 'Password')
     Frame(frame, width=295, height=2, bg='black').place(x=25, y=177)
 
-    show_pass = False  # Initial state
+    show_pass = False 
 
     def toggle_password():
         nonlocal show_pass
@@ -133,8 +131,6 @@ def open_signin_window():
 
     signin_win.mainloop()
 
-
-# ---------------- MAIN SIGNUP WINDOW -----------------
 root = Tk()
 root.title("SignUp")
 icon = PhotoImage(file="icon.png")
@@ -223,7 +219,6 @@ def signup_user():
     created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     try:
-        # Store plain password directly
         cursor.execute("INSERT INTO users(username, password, created_at) VALUES(?,?,?)", 
                        (username, password, created_at))
         conn.commit()
@@ -248,3 +243,4 @@ Button(frame, width=6, text='Sign in', border=0, bg='white', cursor='hand2', fg=
        command=open_signin_window).place(x=200, y=340)
 
 root.mainloop()
+
